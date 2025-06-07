@@ -2,6 +2,26 @@
 
 > This changelog accords to the [Common Changelog Spec](https://github.com/vweevers/common-changelog/tree/main).
 
+## [0.2.2] - 06-06-2025
+
+### Changed
+
+- Bumped dependencies to latest (rand, chrono, once_cell)
+
+## [v0.2.1] - 01-23-2025
+
+### Added
+
+- Adds `debug` macro for variable arg formatting
+
+### Changed
+
+- Makes write<T: Display> more flexible
+
+### Removed
+
+- eprintln statements (fail silently).
+
 ## [v0.2.0] - 12-09-2024
 
 ### Added

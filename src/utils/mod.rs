@@ -1,4 +1,4 @@
-use rand::{thread_rng, Rng};
+use rand::{rng, Rng};
 use std::env;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -11,27 +11,27 @@ pub enum ColorSupportLevel {
 }
 
 pub fn get_ansi_color_sequence() -> String {
-    let mut rng = thread_rng();
+    let mut rng = rng();
 
     let support_level = get_color_support_level();
 
     match support_level {
         ColorSupportLevel::TrueColor => {
-            let r = rng.gen_range(0..=255);
-            let g = rng.gen_range(0..=255);
-            let b = rng.gen_range(0..=255);
+            let r: u8 = rng.random_range(0..=u8::MAX);
+            let g: u8 = rng.random_range(0..=u8::MAX);
+            let b: u8 = rng.random_range(0..=u8::MAX);
             format!("\x1b[38;2;{};{};{}m", r, g, b)
         }
         ColorSupportLevel::Color256 => {
-            let color = rng.gen_range(1..=16) * rng.gen_range(1..=16);
+            let color: u8 = rng.random_range(1..=16) * rng.random_range(1..=16);
             format!("\x1b[38;5;{}m", color)
         }
         ColorSupportLevel::Color16 => {
-            let color = rng.gen_range(1..=7);
+            let color: u8 = rng.random_range(1..=7);
             format!("\x1b[3{}m", color)
         }
         ColorSupportLevel::BasicColor => {
-            let color = rng.gen_range(1..=7);
+            let color: u8 = rng.random_range(1..=7);
             format!("\x1b[3{}m", color)
         }
         ColorSupportLevel::NoColor => String::from(""),
